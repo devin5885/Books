@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace RentMyWrox.Admin
 {
-    public partial class ManageItem : System.Web.UI.Page
+    public partial class ManageItem : WebFormsBaseClass
     {
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -194,11 +194,13 @@
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="Admin\ManageItem.aspx" />
+    <Content Include="Admin\OrderList.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\IntroToCss.css" />
     <Content Include="Content\main.css" />
+    <Content Include="Content\RentMyWrox.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Demonstrations\Page1.aspx" />
@@ -263,12 +265,14 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\UserDemographics\Index.cshtml" />
     <Content Include="Views\UserDemographics\Manage.cshtml" />
+    <Content Include="Views\Shared\_MVCLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="WebForms.Master" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\AddPhoneNumber.aspx.cs">
@@ -383,6 +387,13 @@
     <Compile Include="Admin\ManageItem.aspx.designer.cs">
       <DependentUpon>ManageItem.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\OrderList.aspx.cs">
+      <DependentUpon>OrderList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\OrderList.aspx.designer.cs">
+      <DependentUpon>OrderList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -465,6 +476,16 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms.Master.cs">
+      <DependentUpon>WebForms.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms.Master.designer.cs">
+      <DependentUpon>WebForms.Master</DependentUpon>
+    </Compile>
+    <Compile Include="WebFormsBaseClass.cs">
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
