@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Web;
 using System.Web.UI.HtmlControls;
 
@@ -9,6 +10,7 @@ namespace RentMyWrox
     public class WebFormsBaseClass : System.Web.UI.Page
     {
         public string MetaTagKeywords { get; set; }
+
         public string MetaTagDescription { get; set; }
 
         protected override void OnLoad(EventArgs e)
