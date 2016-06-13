@@ -13,5 +13,13 @@ namespace RentMyWrox.Admin
         {
 
         }
+
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GridViewRow row = GridView1.SelectedRow;
+            string id = row.Cells[1].Text;
+            Response.Redirect(@"ManageItem\" + id);
+        }
+
     }
 }

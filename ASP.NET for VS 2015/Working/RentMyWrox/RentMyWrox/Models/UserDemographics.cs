@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace RentMyWrox.Models
 {
@@ -9,8 +10,11 @@ namespace RentMyWrox.Models
     {
         public UserDemographics()
         {
-            Hobbies = new List<string>();
+            Hobbies = new List<Hobby>();
         }
+
+        [Key]
+        public int Id { get; set; }
 
         public DateTime Birthdate { get; set; }
 
@@ -24,6 +28,6 @@ namespace RentMyWrox.Models
 
         public int TotalPeopleInHome { get; set; }
 
-        public List<string> Hobbies { get; set; }
+        public virtual List<Hobby> Hobbies { get; set; }
     }
 }

@@ -88,6 +88,47 @@ a.level1:hover
     /* Defines the hover style for the main and sub items. */
     background-color: #509EE7;
 }
+.productname
+{
+    color: #C40D42;
+    font-size: x-large;
+}
+.inlinelink
+{
+    margin-left:25px;
+    color: #C40D42;
+} 
+.listprice
+{
+    float:right;
+    color: #C40D42;
+    font-size: x-large;
+    text-align:right;
+}
+.listtitle
+{
+    background-color: #F8B6C9;
+    padding:5px;
+    width:750px;
+}
+.detailtitle
+{
+    background-color: #F8B6C9;
+    padding:5px;
+    width: 950px;
+}
+.textwrap
+{
+    float: right;
+    margin: 10px;
+}
+.checkedout
+{
+    font-weight:bold;
+    color: #C40D42;
+}
+
+
 
 
 
