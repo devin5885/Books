@@ -28,6 +28,6 @@ namespace RentMyWrox.Models
 
         public int TotalPeopleInHome { get; set; }
 
-        public virtual List<Hobby> Hobbies { get; set; }
+        public List<Hobby> Hobbies { get; set; }
     }
 }

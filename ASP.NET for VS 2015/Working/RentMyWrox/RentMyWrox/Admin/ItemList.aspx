@@ -1,23 +1,43 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/WebForms.Master" AutoEventWireup="true" CodeBehind="ItemList.aspx.cs" Inherits="RentMyWrox.Admin.ItemList" %>
+<%@ OutputCache Duration="1200" Location="ServerAndClient" VaryByParam="*" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="True" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSource2" EmptyDataText="There are no data records to display.">
+    <asp:HyperLink runat="server" Text="Add New Item" NavigateUrl="~/Admin/ManageItem" />
+    <br /><br />
+    <asp:GridView ID="GridView1" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
+        runat="server" AutoGenerateColumns="False" DataKeyNames="Id" 
+        DataSourceID="SqlDataSource2"
+        AllowPaging="True" AllowSorting="True" PageSize="5"
+        PagerSettings-Mode="NumericFirstLast" PagerSettings-Visible="true"
+        PagerSettings-Position="TopAndBottom" PagerSettings-PageButtonCount="3"
+        EmptyDataText="There are no data records to display.">
     <Columns>
-        <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" ShowSelectButton="True" ItemStyle-HorizontalAlign="Center" DeleteText="Delete<br/>"
-            SelectText="Full_Edit<br/>" EditText="Quick_Edit<br/>" />
-        <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" SortExpression="Id" />
+        <asp:CommandField ShowDeleteButton="True" ShowEditButton="True"
+            ShowSelectButton="True"
+            ItemStyle-HorizontalAlign="Center"
+            DeleteText="Delete<br/>"
+            SelectText="Full_Edit<br/>"
+            EditText="Quick_Edit<br/>" />
+        <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True"
+            SortExpression="Id" />
         <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
-        <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
-        <asp:BoundField DataField="ItemNumber" HeaderText="Item Number" SortExpression="ItemNumber" />
-        <asp:BoundField DataField="Picture" HeaderText="Picture" SortExpression="Picture" />
+        <asp:BoundField DataField="Description" HeaderText="Description" />
+        <asp:BoundField DataField="ItemNumber" HeaderText="Item Number" 
+            SortExpression="ItemNumber" />
+        <asp:BoundField DataField="Picture" HeaderText="Picture" />
         <asp:BoundField DataField="Cost" HeaderText="Cost" SortExpression="Cost" />
-        <asp:BoundField DataField="CheckedOut" HeaderText="Checked Out" SortExpression="CheckedOut" />
-        <asp:BoundField DataField="DueBack" HeaderText="Due Back" SortExpression="DueBack" />
-        <asp:BoundField DataField="DateAcquired" HeaderText="Date Acquired" SortExpression="DateAcquired" />
-        <asp:CheckBoxField DataField="IsAvailable" HeaderText="Is Available" SortExpression="IsAvailable" />
+        <asp:BoundField DataField="CheckedOut" HeaderText="Checked Out" 
+            SortExpression="CheckedOut" />
+        <asp:BoundField DataField="DueBack" HeaderText="Due Back" 
+            SortExpression="DueBack" />
+        <asp:BoundField DataField="DateAcquired" HeaderText="Date Acquired"
+            SortExpression="DateAcquired" />
+        <asp:CheckBoxField DataField="IsAvailable" HeaderText="Is Available"
+            SortExpression="IsAvailable" />
     </Columns>
-    </asp:GridView>
+</asp:GridView>
+
     <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:RentMyWroxConnectionString1 %>" DeleteCommand="DELETE FROM [Items] WHERE [Id] = @Id" InsertCommand="INSERT INTO [Items] ([Name], [Description], [ItemNumber], [Picture], [Cost], [CheckedOut], [DueBack], [DateAcquired], [IsAvailable]) VALUES (@Name, @Description, @ItemNumber, @Picture, @Cost, @CheckedOut, @DueBack, @DateAcquired, @IsAvailable)" ProviderName="<%$ ConnectionStrings:RentMyWroxConnectionString1.ProviderName %>" SelectCommand="SELECT [Id], [Name], [Description], [ItemNumber], [Picture], [Cost], [CheckedOut], [DueBack], [DateAcquired], [IsAvailable] FROM [Items]" UpdateCommand="UPDATE [Items] SET [Name] = @Name, [Description] = @Description, [ItemNumber] = @ItemNumber, [Picture] = @Picture, [Cost] = @Cost, [CheckedOut] = @CheckedOut, [DueBack] = @DueBack, [DateAcquired] = @DateAcquired, [IsAvailable] = @IsAvailable WHERE [Id] = @Id">
     <DeleteParameters>
         <asp:Parameter Name="Id" Type="Int32" />

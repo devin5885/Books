@@ -127,6 +127,22 @@ a.level1:hover
     font-weight:bold;
     color: #C40D42;
 }
+.paginationline
+{
+    font-size:medium;
+}
+
+.leftside
+{
+    text-align:left;
+}
+
+.rightside
+{
+    margin-left: 100px;
+    text-align:right;
+}
+
 
 
 
