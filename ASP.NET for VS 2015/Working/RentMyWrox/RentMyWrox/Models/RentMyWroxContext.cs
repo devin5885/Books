@@ -25,6 +25,8 @@ namespace RentMyWrox.Models
         public virtual DbSet<Hobby> Hobbies { get; set; }
 
         public virtual DbSet<Item> Items { get; set; }
+
+        public virtual DbSet<Notification> Notifications { get; set; }
     }
 
     //public class MyEntity

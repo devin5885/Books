@@ -2,6 +2,7 @@
     MetaTagDescription="Manage the items that are available to be checked out from the library"
     MetaTagKeywords="Tools, Lending Library, Manage Items, actual useful keywords here"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <RMW:NotificationsControl runat="server" />
     <div>
         <div class="dataentry">
 		    <asp:Label runat="server" Text="Name" AssociatedControlID="tbName" />
