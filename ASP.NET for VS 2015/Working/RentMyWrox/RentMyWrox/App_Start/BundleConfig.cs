@@ -34,7 +34,14 @@ namespace RentMyWrox
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                             "~/Scripts/modernizr-*"));
 
-            ScriptManager.ScriptResourceMapping.AddDefinition(
+            bundles.Add(new ScriptBundle("~/bundles/jquery")
+                .Include("~/Scripts/jquery-{version}.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jqueryval")
+                .Include("~/Scripts/jquery.validate*"));
+
+
+          ScriptManager.ScriptResourceMapping.AddDefinition(
                 "respond",
                 new ScriptResourceDefinition
                 {

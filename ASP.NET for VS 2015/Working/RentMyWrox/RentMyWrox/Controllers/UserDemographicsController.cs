@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Text;
+using System.Data.Entity.Validation;
 using System.Web.Mvc;
 using RentMyWrox.Models;
 
@@ -42,23 +44,27 @@ namespace RentMyWrox.Controllers
         [HttpPost]
         public ActionResult Create(UserDemographics obj)
         {
-            try
+            using (RentMyWroxContext context = new RentMyWroxContext())
             {
-                using (RentMyWroxContext context = new RentMyWroxContext())
+                var ids = Request.Form.GetValues("HobbyIds");
+                if (ids != null)
                 {
-                    var ids = Request.Form.GetValues("HobbyIds");
-                    obj.Hobbies = context.Hobbies
-                        .Where(x => ids.Contains(x.Id.ToString())).ToList();
-                    context.UserDemographics.Add(obj);
+                    obj.Hobbies = context.Hobbies.Where(x => ids.Contains(x.Id.ToString())).ToList();
+                }
+                context.UserDemographics.Add(obj);
+                var validationErrors = context.GetValidationErrors();
+                if (validationErrors.Count() == 0)
+                {
                     context.SaveChanges();
                     return RedirectToAction("Index");
                 }
-            }
-            catch
-            {
-                return View();
-            }
 
+                ViewBag.Hobbies = context.Hobbies.Where(x => x.IsActive)
+                    .OrderBy(x => x.Name).ToList();
+
+                ViewBag.ServerValidationErrors = ConvertValidationErrorsToString(validationErrors);
+                return View("Manage", obj);
+            }
         }
 
         // GET: UserDemographics/Edit/5
@@ -73,21 +79,25 @@ namespace RentMyWrox.Controllers
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
-            try
+            using (RentMyWroxContext context = new RentMyWroxContext())
             {
-                using (RentMyWroxContext context = new RentMyWroxContext())
+                var item = context.UserDemographics.FirstOrDefault(x => x.Id == id);
+                TryUpdateModel(item);
+                var ids = Request.Form.GetValues("HobbyIds");
+                item.Hobbies = context.Hobbies.Where(x => ids.Contains(x.Id.ToString())).ToList();
+                var validationErrors = context.GetValidationErrors();
+                if (validationErrors.Count() == 0)
                 {
-                    var item = context.UserDemographics.FirstOrDefault(x => x.Id == id);
-                    TryUpdateModel(item);
                     context.SaveChanges();
                     return RedirectToAction("Index");
                 }
-            }
-            catch
-            {
-                return View();
-            }
 
+                ViewBag.Hobbies = context.Hobbies.Where(x => x.IsActive)
+                    .OrderBy(x => x.Name).ToList();
+
+                ViewBag.ServerValidationErrors = ConvertValidationErrorsToString(validationErrors);        
+                return View("Manage", item);
+            }
         }
 
         // GET: UserDemographics/Delete/5
@@ -145,5 +155,21 @@ namespace RentMyWrox.Controllers
                 return View(list);
             }
         }
+
+        private string ConvertValidationErrorsToString(IEnumerable<DbEntityValidationResult> list)
+        {
+            StringBuilder results = new StringBuilder();
+            results.Append("You had the following validation errors: ");
+            foreach (var item in list)
+            {
+                foreach (var failure in item.ValidationErrors)
+                {
+                    results.Append(failure.ErrorMessage);
+                    results.Append(" ");
+                }
+            }
+            return results.ToString();
+        }
+
     }
 }

@@ -13,6 +13,15 @@ namespace RentMyWrox.Admin {
     public partial class ManageItem {
         
         /// <summary>
+        /// ValidationSummary1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
+        
+        /// <summary>
         /// tbName control.
         /// </summary>
         /// <remarks>
@@ -20,6 +29,15 @@ namespace RentMyWrox.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbName;
+        
+        /// <summary>
+        /// rfName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfName;
         
         /// <summary>
         /// tbDescription control.
@@ -31,6 +49,15 @@ namespace RentMyWrox.Admin {
         protected global::System.Web.UI.WebControls.TextBox tbDescription;
         
         /// <summary>
+        /// rfDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfDescription;
+        
+        /// <summary>
         /// tbCost control.
         /// </summary>
         /// <remarks>
@@ -40,6 +67,24 @@ namespace RentMyWrox.Admin {
         protected global::System.Web.UI.WebControls.TextBox tbCost;
         
         /// <summary>
+        /// rfCost control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfCost;
+        
+        /// <summary>
+        /// cCost control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cCost;
+        
+        /// <summary>
         /// tbItemNumber control.
         /// </summary>
         /// <remarks>
@@ -47,6 +92,15 @@ namespace RentMyWrox.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbItemNumber;
+        
+        /// <summary>
+        /// rfItemNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfItemNumber;
         
         /// <summary>
         /// fuPicture control.
@@ -65,5 +119,23 @@ namespace RentMyWrox.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbAcquiredDate;
+        
+        /// <summary>
+        /// rfAcquiredDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfAcquiredDate;
+        
+        /// <summary>
+        /// cAcquiredDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cAcquiredDate;
     }
 }

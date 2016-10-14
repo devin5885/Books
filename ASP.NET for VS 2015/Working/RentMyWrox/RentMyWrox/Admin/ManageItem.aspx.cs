@@ -40,23 +40,27 @@ namespace RentMyWrox.Admin
 
         protected void SaveItem_Clicked(object sender, EventArgs e)
         {
-            Item item;
-            using (RentMyWroxContext context = new RentMyWroxContext())
+            if (IsValid)
             {
-                if (itemId == 0)
+
+                Item item;
+                using (RentMyWroxContext context = new RentMyWroxContext())
                 {
-                    item = new Item();
-                    UpdateItem(item);
-                    context.Items.Add(item);
+                    if (itemId == 0)
+                    {
+                        item = new Item();
+                        UpdateItem(item);
+                        context.Items.Add(item);
+                    }
+                    else
+                    {
+                        item = context.Items.FirstOrDefault(x => x.Id == itemId);
+                        UpdateItem(item);
+                    }
+                    context.SaveChanges();
                 }
-                else
-                {
-                    item = context.Items.FirstOrDefault(x => x.Id == itemId);
-                    UpdateItem(item);
-                }
-                context.SaveChanges();
+                Response.Redirect("~/admin/ItemList");
             }
-            Response.Redirect("~/admin/ItemList");
         }
 
         private void UpdateItem(Item item)
