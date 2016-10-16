@@ -16,7 +16,7 @@
     <div class="form-horizontal">
         <h4>UserDemographics</h4>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
         @if (!string.IsNullOrWhiteSpace(serverValidationProblems))
         {
             <div class="alert">@serverValidationProblems</div>
