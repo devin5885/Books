@@ -76,7 +76,17 @@
             }
             @Html.ActionLink("Full details", "Details", new { @item.Id },
                 new { @class = "inlinelink" })
-            <a class="inlinelink" href="">Add to Cart</a>
+            @Ajax.ActionLink("Add to Cart",
+                    "AddToCart",
+                    "ShoppingCart",
+                    new { @item.Id },
+                    new AjaxOptions
+                    {
+                        UpdateTargetId = "shoppingcartsummary",
+                        InsertionMode = InsertionMode.Replace,
+                        HttpMethod = "GET"
+                    },
+                    new { @class = "inlinelink" })
         </p>
     </div>
 }

@@ -143,6 +143,42 @@ a.level1:hover
     text-align:right;
 }
 
+.progressnotification { 
+    height: 30px;
+    width: 500px;
+    background-color: #FDE9EF;
+    padding-left: 40px;
+    line-height: 32px;
+    color: #C40D42;
+}
+
+.moveLeft { 
+    margin-left: 15px;
+}
+
+#shoppingcartsummary {
+    vertical-align: middle;
+    text-align:right;
+    margin-left: 100px;
+}
+.storeOpen {
+    background-color:green;
+    color:white;
+    text-align:center;
+    font-size: small;
+    font-weight: bold;
+    width:125px;
+}
+
+.storeClosed {
+    background-color:#F8B6C9;
+    color:red;
+    text-align:center;
+    font-size: small;
+    font-weight: bold;
+    width:125px;
+}
+
 
 
 

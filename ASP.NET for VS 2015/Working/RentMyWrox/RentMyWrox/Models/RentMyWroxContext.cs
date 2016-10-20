@@ -27,6 +27,11 @@ namespace RentMyWrox.Models
         public virtual DbSet<Item> Items { get; set; }
 
         public virtual DbSet<Notification> Notifications { get; set; }
+
+        public virtual DbSet<ShoppingCart> ShoppingCarts { get; set; }
+
+        public virtual DbSet<Order> Orders { get; set; }
+
     }
 
     //public class MyEntity

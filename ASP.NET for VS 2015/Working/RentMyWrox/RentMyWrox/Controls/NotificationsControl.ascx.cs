@@ -21,12 +21,43 @@ namespace RentMyWrox.Controls
 
         public DateTime? DateForDisplay { get; set; }
 
+        private int numberToSkip;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!DateForDisplay.HasValue)
             {
                 DateForDisplay = DateTime.Now;
             }
+
+            if (!IsPostBack)
+            {
+                numberToSkip = 0;
+                DisplayInformation();
+            }
+            else
+            {
+                numberToSkip = int.Parse(hfNumberToSkip.Value);
+            }
+
+        }
+
+        protected void Previous_Click(object sender, EventArgs e)
+        {
+            numberToSkip--;
+            DisplayInformation();
+        }
+
+        protected void Next_Click(object sender, EventArgs e)
+        {
+            numberToSkip++;
+            DisplayInformation();
+            System.Threading.Thread.Sleep(5000);
+        }
+
+        private void DisplayInformation()
+        {
+            hfNumberToSkip.Value = numberToSkip.ToString();
 
             using (RentMyWroxContext context = new RentMyWroxContext())
             {
@@ -36,12 +67,19 @@ namespace RentMyWrox.Controls
 
                 if (Display != null && Display != DisplayType.Both)
                 {
-                    notes = notes.Where(x => x.IsAdminOnly ==
-                                             (Display == DisplayType.AdminOnly));
+                    notes = notes.Where(x => x.IsAdminOnly == (Display == DisplayType.AdminOnly));
                 }
 
-                Notification note = notes.OrderByDescending(x => x.CreateDate)
-                    .FirstOrDefault();
+                // rolls over the list if it goes past the max number
+                if (numberToSkip == notes.Count())
+                {
+                    numberToSkip = 0;
+                }
+                
+                lbPrevious.Visible = numberToSkip > 0;
+                lbNext.Visible = numberToSkip != notes.Count() - 1;
+
+                Notification note = notes.OrderByDescending(x => x.CreateDate).Skip(numberToSkip).FirstOrDefault();
 
                 if (note != null)
                 {
@@ -50,5 +88,12 @@ namespace RentMyWrox.Controls
                 }
             }
         }
+
+        protected void Notifications_Tick(object sender, EventArgs e)
+        {
+            numberToSkip++;
+            DisplayInformation();
+        }
+
     }
 }

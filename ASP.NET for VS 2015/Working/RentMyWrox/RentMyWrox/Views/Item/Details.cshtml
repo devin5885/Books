@@ -25,7 +25,19 @@ else
 
         @if (Model.IsAvailable)
         {
-            <a class="inlinelink" href="">Add to Cart</a>
+            @Ajax.ActionLink("Add to Cart",
+            "AddToCart",
+            "ShoppingCart",
+            new { @Model.Id },
+            new AjaxOptions
+            {
+                UpdateTargetId = "shoppingcartsummary",
+                InsertionMode = InsertionMode.Replace,
+                HttpMethod = "GET",
+                OnBegin = "fadeOutShoppingCartSummary",
+                OnSuccess = "fadeInShoppingCartSummary"
+            },
+            new { @class = "inlinelink" })
         }
         else
         {
