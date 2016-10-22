@@ -11,10 +11,10 @@
     @RenderSection("scripts", required: false)
 </head>
 <body>
-    <div id="header">
-        <span id="shoppingcartsummary">@Html.Action("Index", "ShoppingCart")</span>
-    </div>
-    <div id="nav">
+<div id="header">
+    <span id="shoppingcartsummary">@Html.Action("Index", "ShoppingCart")</span>
+</div>
+<div id="nav">
     <div id="LeftNavigation">
         <ul class="level1">
             <li><a href="~" class="level1">Home</a></li>
@@ -26,51 +26,54 @@
             <li>
                 @Html.ActionLink("About Us", "About", "Home",
                     new { @class = "level1" })
-            </li>  
+            </li>
         </ul>
         <br />
         <div id="storeHoursMessage"></div>
         @Html.Action("NonAdminSnippet", "Notifications")
     </div>
-    </div>
-    <div id="section">
-        @RenderBody()
-    </div>
-    <div id="specialnotes">
-        @RenderSection("SpecialNotes", false)
-    </div>
-    <div id="footer">
-        footer content here
-    </div>
+</div>
+<div id="section">
+    @RenderBody()
+</div>
+<div id="specialnotes">
+    @RenderSection("SpecialNotes", false)
+</div>
+<div id="footer">
+    footer content here
+</div>
 </body>
 </html>
+@Scripts.Render("~/bundles/jqu/ery")
+@Scripts.Render("~/bundles/bootstrap")
 @Scripts.Render("~/bundles/jqueryajax")
+<script language="javascript" type="text/javascript" src="~/scripts/jquery-ui-1.11.4.js"></script>
 @RenderSection("scripts", required: false)
 <script type="text/javascript">
-        $(document).ready(function () {
-            $(".editordatepicker").datepicker();
-        });
+    $(document).ready(function () {
+        $(".editordatepicker").datepicker();
+    });
 
-        function getStoreHours() {
-            $.getJSON("/StoreOpen")
-                .done(function (data) {
-                    var message = data.Message;
-                    $("#storeHoursMessage").html(message);
-                    $("#storeHoursMessage").removeClass();
-                    if (data.IsStoreOpenNow == false) {
-                        $("#storeHoursMessage").addClass("storeClosed");
-                    }
-                    else {
-                        $("#storeHoursMessage").addClass("storeOpen");
-                    }
-                    setTimeout(function () {
-                        getStoreHours();
-                    }, 20000);
-                });
-        };
-        
-        $(document).ready(function () {
-                getStoreHours();
+    function getStoreHours() {
+        $.getJSON("/StoreOpen")
+            .done(function (data) {
+                var message = data.Message;
+                $("#storeHoursMessage").html(message);
+                $("#storeHoursMessage").removeClass();
+                if (data.IsStoreOpenNow == false) {
+                    $("#storeHoursMessage").addClass("storeClosed");
+                }
+                else {
+                    $("#storeHoursMessage").addClass("storeOpen");
+                }
+                setTimeout(function () {
+                    getStoreHours();
+                }, 20000);
             });
+    };
+
+    $(document).ready(function () {
+        getStoreHours();
+    });
 </script>
 
