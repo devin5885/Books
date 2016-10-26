@@ -60,7 +60,7 @@
 
 @foreach (var item in Model)
 {
-    <div>
+    <div class="listitem">
         <div class="listtitle">
             <span class="productname">@item.Name</span>
             <span class="listprice">@item.Cost.ToString("C")</span>
@@ -77,18 +77,31 @@
             @Html.ActionLink("Full details", "Details", new { @item.Id },
                 new { @class = "inlinelink" })
             @Ajax.ActionLink("Add to Cart",
-                    "AddToCart",
-                    "ShoppingCart",
-                    new { @item.Id },
-                    new AjaxOptions
-                    {
-                        UpdateTargetId = "shoppingcartsummary",
-                        InsertionMode = InsertionMode.Replace,
-                        HttpMethod = "GET"
-                    },
-                    new { @class = "inlinelink" })
+                "AddToCart",
+                "ShoppingCart",
+                new { @item.Id },
+                new AjaxOptions
+                {
+                    UpdateTargetId = "shoppingcartsummary",
+                    InsertionMode = InsertionMode.Replace,
+                    HttpMethod = "GET",
+                    OnBegin = "fadeOutShoppingCartSummary",
+                    OnSuccess = "fadeInShoppingCartSummary"
+                },
+                new { @class = "inlinelink" })
         </p>
     </div>
 }
+@section Scripts { 
+    <script>
+        $(".listitem").hover( 
+            function () {
+                $(this).css('background-color', '#F8B6C9');
+            }, function () {
+                $(this).css('background-color', 'white');
+        });
+    </script>
+}
+
 
 

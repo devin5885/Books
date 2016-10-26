@@ -26,18 +26,18 @@ else
         @if (Model.IsAvailable)
         {
             @Ajax.ActionLink("Add to Cart",
-            "AddToCart",
-            "ShoppingCart",
-            new { @Model.Id },
-            new AjaxOptions
-            {
-                UpdateTargetId = "shoppingcartsummary",
-                InsertionMode = InsertionMode.Replace,
-                HttpMethod = "GET",
-                OnBegin = "fadeOutShoppingCartSummary",
-                OnSuccess = "fadeInShoppingCartSummary"
-            },
-            new { @class = "inlinelink" })
+                "AddToCart",
+                "ShoppingCart",
+                new { @Model.Id },
+                new AjaxOptions
+                {
+                    UpdateTargetId = "shoppingcartsummary",
+                    InsertionMode = InsertionMode.Replace,
+                    HttpMethod = "GET",
+                    OnBegin = "fadeOutShoppingCartSummary",
+                    OnSuccess = "fadeInShoppingCartSummary"
+                },
+                new { @class = "inlinelink" })
         }
         else
         {
@@ -47,6 +47,27 @@ else
             </span>
         }
     </div>
-} 
+}
 
-             
+@section Scripts {
+    <script>
+        var isLarge = false;
+
+        $(".textwrap").click(
+            function () {
+                if (!isLarge) { 
+                    isLarge = true;
+		            $(this).css('height', '500');
+		            $(this).attr("title", "Click to shrink");
+                }
+                else {
+	                isLarge = false;
+	                $(this).css('height', '150');
+	                $(this).attr("title", "Click to expand");
+	            }
+            });
+    </script>
+}
+
+
+           

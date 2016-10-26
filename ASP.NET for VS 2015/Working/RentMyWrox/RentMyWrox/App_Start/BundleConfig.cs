@@ -40,9 +40,17 @@ namespace RentMyWrox
             bundles.Add(new ScriptBundle("~/bundles/jqueryval")
                 .Include("~/Scripts/jquery.validate*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/common")
+                .Include(
+                    "~/Scripts/jquery-{version}.js",
+                    "~/Scripts/jquery-ui-{version}.js",
+                    "~/Scripts/jquery.unobtrusive-ajax*",
+                    "~/Scripts/MainPageManagement.js"
+            ));
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryajax").Include("~/Scripts/jquery.unobtrusive-ajax*"));
 
-          ScriptManager.ScriptResourceMapping.AddDefinition(
+            ScriptManager.ScriptResourceMapping.AddDefinition(
                 "respond",
                 new ScriptResourceDefinition
                 {
