@@ -6,9 +6,9 @@
     <title>@ViewBag.Title</title>
     <link href="~/Content/RentMyWrox.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/common")
     <script src="~/Scripts/jquery.unobtrusive-ajax.js" type="text/javascript"></script>
-    @Scripts.Render("~/bundles/modernizr")    
+    @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
     <div id="header">
@@ -44,13 +44,10 @@
     </div>
 </body>
 </html>
-@Scripts.Render("~/bundles/bootstrap")
-@Scripts.Render("~/bundles/jqueryajax")
-<script language="javascript" type="text/javascript" src="~/scripts/jquery-ui-1.11.4.js"></script>
 @RenderSection("scripts", required: false)
 <script type="text/javascript">
-        $(document).ready(function () {
-            $(".editordatepicker").datepicker();
-        });       
+    $(document).ready(function () {
+        $(".editordatepicker").datepicker();
+    });
 </script>
 
