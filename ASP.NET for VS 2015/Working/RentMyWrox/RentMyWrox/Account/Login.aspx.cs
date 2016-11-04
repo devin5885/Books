@@ -30,6 +30,7 @@ namespace RentMyWrox.Account
                 // Validate the user password
                 var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
                 var signinManager = Context.GetOwinContext().GetUserManager<ApplicationSignInManager>();
+                Guid currentTemporaryId = Controllers.UserHelper.GetUserId();
 
                 // This doen't count login failures towards account lockout
                 // To enable password failures to trigger lockout, change to shouldLockout: true
@@ -38,6 +39,9 @@ namespace RentMyWrox.Account
                 switch (result)
                 {
                     case SignInStatus.Success:
+                        var user = signinManager.UserManager.FindByName(Email.Text);
+                        Controllers.UserHelper.TransferTemporaryUserToRealUser(currentTemporaryId, user.Id);
+
                         IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
                         break;
                     case SignInStatus.LockedOut:

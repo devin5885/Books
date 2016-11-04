@@ -178,6 +178,11 @@ a.level1:hover
     font-weight: bold;
     width:125px;
 }
+.checkout {
+    margin-left: 15px;
+    color:white;
+    font-size: small;
+}
 
 
 

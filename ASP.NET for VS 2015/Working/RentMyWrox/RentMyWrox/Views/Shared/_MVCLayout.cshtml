@@ -17,16 +17,24 @@
     <div id="nav">
         <div id="LeftNavigation">
             <ul class="level1">
-                <li><a href="~" class="level1">Home</a></li>
-                <li>@Html.ActionLink("Items", "", "Items", new { @class = "level1" })</li>
-                <li>
-                    @Html.ActionLink("Contact Us", "ContactUs", "Home",
-                    new { @class = "level1" })
-                </li>
-                <li>
-                    @Html.ActionLink("About Us", "About", "Home",
-                    new { @class = "level1" })
-                </li>
+                <li><a href="~/" class="level1">Home</a></li>
+                <li><a class="level1" href="~/Contact">Contact Us</a></li>
+                <li><a class="level1" href="~/About">About Us</a></li>
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <li><a class="level1" href="~/Account/Login">Login</a></li>
+                }
+                else
+                {
+                    <li>&nbsp;</li>
+                }
+                @if (User.IsInRole("Admin"))
+                {
+                    <li><a class="level1" href="/Admin/Default">Admin Home</a></li>
+                    <li><a class="level1" href="/Admin/ItemList">Items List</a></li>
+                    <li><a class="level1" href="/Admin/OrderList">Order List</a></li>
+                    <li><a class="level1" href="/Admin/UserList">User List</a></li>
+                }
             </ul>
             <br />
             <div id="storeHoursMessage"></div>

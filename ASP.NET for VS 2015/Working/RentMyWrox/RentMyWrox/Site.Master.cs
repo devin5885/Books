@@ -69,7 +69,9 @@ namespace RentMyWrox
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            AdminMenu.Visible = HttpContext.Current.User.IsInRole("Admin");
+            loginlink.Visible = !HttpContext.Current.User.Identity.IsAuthenticated;
+            loggedinlink.Visible = !loginlink.Visible;
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)

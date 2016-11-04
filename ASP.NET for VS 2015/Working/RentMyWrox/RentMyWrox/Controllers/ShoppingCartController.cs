@@ -9,8 +9,6 @@ namespace RentMyWrox.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        private Guid UserID = Guid.Empty;
-
         public ActionResult Index()
         {
             using(RentMyWroxContext context = new RentMyWroxContext())
@@ -22,6 +20,7 @@ namespace RentMyWrox.Controllers
 
         public ActionResult AddToCart(int id)
         {
+            Guid UserID = UserHelper.GetUserId();
             using (RentMyWroxContext context = new RentMyWroxContext())
             {
                 Item addedItem = context.Items.FirstOrDefault(x => x.Id == id);
@@ -55,9 +54,20 @@ namespace RentMyWrox.Controllers
                 return PartialView("_ShoppingCartSummary", summary);
             }
         }
-        
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult Checkout()
+        {
+            using (RentMyWroxContext context = new RentMyWroxContext())
+            {
+                return null;
+            }
+        }
+
         private ShoppingCartSummary GetShoppingCartSummary(RentMyWroxContext context)
         {
+            Guid UserID = UserHelper.GetUserId();
             ShoppingCartSummary summary = new ShoppingCartSummary();
             var cartList = context.ShoppingCarts.Where(x => x.UserId == UserID);
             if (cartList != null && cartList.Count() > 0)
