@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using RentMyWrox.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace RentMyWrox.Models
 {
@@ -25,7 +26,34 @@ namespace RentMyWrox.Models
         {
             return Task.FromResult(GenerateUserIdentity(manager));
         }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public Address Address { get; set; }
+
+        public int UserDemographicsId { get; set; }
+
+        public int OrderCount { get; set; }
+
     }
+
+    public class Address
+    {
+        public string Address1 { get; set; }
+
+        public string Address2 { get; set; }
+
+        public string City { get; set; }
+
+        [StringLength(2)]
+        public string State { get; set; }
+
+        [StringLength(15, MinimumLength = 2)]
+        public string ZipCode { get; set; }
+    }
+
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

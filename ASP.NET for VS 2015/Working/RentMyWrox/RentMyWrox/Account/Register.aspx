@@ -37,6 +37,81 @@
             </div>
         </div>
         <div class="form-group">
+             <asp:Label runat="server" AssociatedControlID="FirstName" 
+                 CssClass="col-md-2 control-label">First Name</asp:Label>
+             <div class="col-md-10">
+                <asp:TextBox runat="server" TextMode="SingleLine" ID="FirstName"
+                        CssClass="form-control" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="FirstName"
+                    CssClass="text-danger"
+                    ErrorMessage="The first name field is required." />
+            </div>
+        </div>
+        <div class="form-group">
+             <asp:Label runat="server" AssociatedControlID="LastName" 
+                 CssClass="col-md-2 control-label">Last Name</asp:Label>
+             <div class="col-md-10">
+                <asp:TextBox runat="server" TextMode="SingleLine" ID="LastName"
+                        CssClass="form-control" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="LastName"
+                    CssClass="text-danger"
+                    ErrorMessage="The last name field is required." />
+            </div>
+        </div>
+        <div class="form-group">
+             <asp:Label runat="server" AssociatedControlID="Address1" 
+                 CssClass="col-md-2 control-label">Address Line 1</asp:Label>
+             <div class="col-md-10">
+                <asp:TextBox runat="server" TextMode="SingleLine" ID="Address1"
+                    CssClass="form-control" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="Address1"
+                    CssClass="text-danger"
+                    ErrorMessage="The Address Line 1 field is required." />
+            </div>
+        </div>
+        <div class="form-group">
+             <asp:Label runat="server" AssociatedControlID="Address2" 
+                 CssClass="col-md-2 control-label">Address Line 2</asp:Label>
+             <div class="col-md-10">
+                <asp:TextBox runat="server" ID="Address2" CssClass="form-control" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="Address2"
+                    CssClass="text-danger"
+                    ErrorMessage="The address line 2 field is required." />
+            </div>
+        </div>
+        <div class="form-group">
+             <asp:Label runat="server" AssociatedControlID="City"
+                 CssClass="col-md-2 control-label">City</asp:Label>
+             <div class="col-md-10">
+                <asp:TextBox runat="server" ID="City" CssClass="form-control" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="City"
+                    CssClass="text-danger" ErrorMessage="The city field is required." />
+            </div>
+        </div>
+        <div class="form-group">
+             <asp:Label runat="server" AssociatedControlID="State" 
+                 CssClass="col-md-2 control-label">State</asp:Label>
+             <div class="col-md-10">
+                <asp:TextBox MaxLength="2" runat="server" ID="State"
+                        CssClass="form-control" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="State"
+                    CssClass="text-danger"
+                    ErrorMessage="The state field is required." />
+            </div>
+        </div>
+        <div class="form-group">
+             <asp:Label runat="server" AssociatedControlID="ZipCode" 
+                 CssClass="col-md-2 control-label">Zip Code</asp:Label>
+             <div class="col-md-10">
+                <asp:TextBox MaxLength="10" runat="server" ID="ZipCode"
+                        CssClass="form-control" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="ZipCode"
+                    CssClass="text-danger"
+                    ErrorMessage="The zip code field is required." />
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <asp:Button runat="server" OnClick="CreateUser_Click" Text="Register" CssClass="btn btn-default" />
             </div>

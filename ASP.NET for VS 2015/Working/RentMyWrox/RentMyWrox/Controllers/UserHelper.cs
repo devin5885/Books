@@ -69,9 +69,30 @@ namespace RentMyWrox.Controllers
                         }
                     }
 
+                    foreach(var tempUserVisits in context.UserVisits.Where(x=>x.UserId == tempId))
+                    {
+                        tempUserVisits.UserId = newUserId;
+                    }
+
                     context.SaveChanges();
                 }
             }
         }
+
+        public static void AddUserVisit(int itemId, RentMyWroxContext context)
+        {
+            Guid userId = GetUserId();
+            context.UserVisits.RemoveRange(context.UserVisits.Where(x => x.UserId == userId
+                && x.ItemId == itemId));
+            context.UserVisits.Add(
+                new UserVisit
+                {
+                    ItemId = itemId,
+                    UserId = userId,
+                    VisitDate = DateTime.UtcNow
+                }
+            );
+        }
+                
     }
 }

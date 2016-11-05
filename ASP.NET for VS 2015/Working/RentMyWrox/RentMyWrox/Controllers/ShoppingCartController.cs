@@ -48,6 +48,7 @@ namespace RentMyWrox.Controllers
                         // increment the quantity of the existing shopping cart item
                         sameItemInShoppingCart.Quantity++;
                     }
+                    UserHelper.AddUserVisit(id, context);
                     context.SaveChanges();
                 }
                 ShoppingCartSummary summary = GetShoppingCartSummary(context);
@@ -75,6 +76,13 @@ namespace RentMyWrox.Controllers
                 summary.TotalValue = cartList.Sum(x => x.Quantity * x.Item.Cost);
                 summary.Quantity = cartList.Sum(x => x.Quantity);
             }
+            var appUser = UserHelper.GetApplicationUser();
+            if (appUser != null)
+            {
+                summary.UserDisplayName = string.Format("{0} {1}", appUser.FirstName,
+                    appUser.LastName);
+            }
+
             return summary;
         }
     }

@@ -55,7 +55,24 @@ namespace RentMyWrox.Controllers
             using (RentMyWroxContext context = new RentMyWroxContext())
             {
                 Item item = context.Items.FirstOrDefault(x => x.Id == id);
+                UserHelper.AddUserVisit(id, context);
+                context.SaveChanges();
                 return View(item);
+            }
+        }
+
+        public ActionResult Recent()
+        {
+            using (RentMyWroxContext context = new RentMyWroxContext())
+            {
+                Guid newUserId = UserHelper.GetUserId();
+                var recentItems = (from uv in context.UserVisits
+                                    join item in context.Items on uv.ItemId equals item.Id
+                                    where uv.UserId == newUserId
+                                    orderby uv.VisitDate descending
+                                    select item as Item).Take(3).ToList();
+                context.SaveChanges();
+                return PartialView("_RecentItems", recentItems);
             }
         }
 

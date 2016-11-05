@@ -32,6 +32,7 @@ namespace RentMyWrox.Models
 
         public virtual DbSet<Order> Orders { get; set; }
 
+        public virtual DbSet<UserVisit> UserVisits { get; set; }
     }
 
     //public class MyEntity

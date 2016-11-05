@@ -43,6 +43,7 @@
     </div>
     <div id="section">
         @RenderBody()
+        <span>@Html.Action("Recent", "Item")</span>
     </div>
     <div id="specialnotes">
         @RenderSection("SpecialNotes", false)

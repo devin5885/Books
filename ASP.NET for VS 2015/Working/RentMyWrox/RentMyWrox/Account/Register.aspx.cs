@@ -15,7 +15,24 @@ namespace RentMyWrox.Account
         {
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var signInManager = Context.GetOwinContext().Get<ApplicationSignInManager>();
-            var user = new ApplicationUser() { UserName = Email.Text, Email = Email.Text };
+            var user = new ApplicationUser()
+            {
+                FirstName = FirstName.Text,
+                LastName = LastName.Text,
+                UserName = Email.Text,
+                Email = Email.Text,
+                OrderCount = 0,
+                UserDemographicsId = 0,
+                Address = new Address
+                {
+                    Address1 = Address1.Text,
+                    Address2 = Address2.Text,
+                    City = City.Text,
+                    State = State.Text,
+                    ZipCode = ZipCode.Text
+                }
+            };
+
             Guid oldTemporaryUser = Controllers.UserHelper.GetUserId();
             IdentityResult result = manager.Create(user, Password.Text);
             if (result.Succeeded)
@@ -27,9 +44,10 @@ namespace RentMyWrox.Account
                 Controllers.UserHelper.TransferTemporaryUserToRealUser(oldTemporaryUser, user.Id);
 
                 signInManager.SignIn( user, isPersistent: false, rememberBrowser: false);
-                IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
+                Response.Redirect(@"~\UserDemographics\Create?" +
+                                  Request.QueryString["ReturnUrl"]);
             }
-            else 
+            else
             {
                 ErrorMessage.Text = result.Errors.FirstOrDefault();
             }

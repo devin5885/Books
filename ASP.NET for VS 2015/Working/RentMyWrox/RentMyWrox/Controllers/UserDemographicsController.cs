@@ -41,6 +41,7 @@ namespace RentMyWrox.Controllers
         }
 
         // POST: UserDemographics/Create
+        [ValidateInput(false)]
         [HttpPost]
         public ActionResult Create(UserDemographics obj)
         {
@@ -49,23 +50,39 @@ namespace RentMyWrox.Controllers
                 var ids = Request.Form.GetValues("HobbyIds");
                 if (ids != null)
                 {
-                    obj.Hobbies = context.Hobbies.Where(x => ids.Contains(x.Id.ToString())).ToList();
+                    obj.Hobbies = context.Hobbies.Where(x => ids.Contains(x.Id.ToString()))
+                        .ToList();
                 }
                 context.UserDemographics.Add(obj);
                 var validationErrors = context.GetValidationErrors();
                 if (validationErrors.Count() == 0)
                 {
                     context.SaveChanges();
-                    return RedirectToAction("Index");
+
+                    ApplicationUser user = UserHelper.GetApplicationUser();
+                    user.UserDemographicsId = obj.Id;
+                    context.SaveChanges();
+
+                    var returnUrl = Request.QueryString["ReturnUrl"];
+                    if (returnUrl != null)
+                    { 
+                        return Redirect(Request.QueryString["ReturnUrl"]);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
                 }
 
                 ViewBag.Hobbies = context.Hobbies.Where(x => x.IsActive)
                     .OrderBy(x => x.Name).ToList();
 
-                ViewBag.ServerValidationErrors = ConvertValidationErrorsToString(validationErrors);
+                ViewBag.ServerValidationErrors =
+                    ConvertValidationErrorsToString(validationErrors);
                 return View("Manage", obj);
             }
         }
+
 
         // GET: UserDemographics/Edit/5
         public ActionResult Edit(int id)
@@ -74,7 +91,7 @@ namespace RentMyWrox.Controllers
             return View("Manage", model);
 
         }
-
+        
         // POST: UserDemographics/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
