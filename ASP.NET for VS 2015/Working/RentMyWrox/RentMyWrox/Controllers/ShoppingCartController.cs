@@ -60,11 +60,72 @@ namespace RentMyWrox.Controllers
         [HttpGet]
         public ActionResult Checkout()
         {
+            Guid UserID = UserHelper.GetUserId();
+            ViewBag.ApplicationUser = UserHelper.GetApplicationUser();
+            ViewBag.AmCheckingOut = true;
             using (RentMyWroxContext context = new RentMyWroxContext())
             {
-                return null;
+                var shoppingCartItems = context.ShoppingCarts.Include("Item")
+                    .Where(x => x.UserId == UserID);
+                Order newOrder = new Order
+                {
+                    OrderDate = DateTime.Now,
+                    PickupDate = DateTime.Now.Date,
+                    UserId = UserID,
+                    OrderDetails = new List<OrderDetail>()
+                };
+                foreach (var item in shoppingCartItems)
+                {
+                    OrderDetail od = new OrderDetail
+                    {
+                        Item = item.Item,
+                        PricePaidEach = item.Item.Cost,
+                        Quantity = item.Quantity
+                    };
+                    newOrder.OrderDetails.Add(od);
+                }
+                return View("Details", newOrder);
+            }
+
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Checkout(Order order)
+        {
+            Guid UserID = UserHelper.GetUserId();
+            ViewBag.ApplicationUser = UserHelper.GetApplicationUser();
+            using (RentMyWroxContext context = new RentMyWroxContext())
+            {
+                var shoppingCartItems = context.ShoppingCarts
+                    .Include("Item")
+                    .Where(x => x.UserId == UserID);
+                order.OrderDetails = new List<OrderDetail>();
+                order.UserId = UserID;
+                order.OrderDate = DateTime.Now;
+                foreach (var item in shoppingCartItems)
+                {
+                    int quantity = 0;
+                    int.TryParse(Request.Form.Get(item.Item.Id.ToString()), out quantity);
+                    if (quantity > 0)
+                    {
+                        OrderDetail od = new OrderDetail
+                        {
+                            Item = item.Item,
+                            PricePaidEach = item.Item.Cost,
+                            Quantity = quantity
+                        };
+                        order.OrderDetails.Add(od);
+                    }
+                }
+                order = context.Orders.Add(order);
+                context.ShoppingCarts.RemoveRange(shoppingCartItems);
+                context.SaveChanges();
+                return RedirectToAction("Details", "Order",
+                    new { id = order.Id });
             }
         }
+
 
         private ShoppingCartSummary GetShoppingCartSummary(RentMyWroxContext context)
         {

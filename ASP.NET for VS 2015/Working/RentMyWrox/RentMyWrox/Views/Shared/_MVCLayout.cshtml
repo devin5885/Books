@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using RentMyWrox.Models;
+@{
+    bool userIsCheckingOut = ViewBag.AmCheckingOut == null ? false : ViewBag.AmCheckingOut;
+}
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -12,7 +17,10 @@
 </head>
 <body>
     <div id="header">
-        <span id="shoppingcartsummary">@Html.Action("Index", "ShoppingCart")</span>
+@if (!userIsCheckingOut)
+{
+     <span id="shoppingcartsummary">@Html.Action("Index", "ShoppingCart")</span>
+}
     </div>
     <div id="nav">
         <div id="LeftNavigation">
@@ -43,7 +51,10 @@
     </div>
     <div id="section">
         @RenderBody()
-        <span>@Html.Action("Recent", "Item")</span>
+@if (!userIsCheckingOut)
+{
+            <span>@Html.Action("Recent", "Item")</span>
+}
     </div>
     <div id="specialnotes">
         @RenderSection("SpecialNotes", false)

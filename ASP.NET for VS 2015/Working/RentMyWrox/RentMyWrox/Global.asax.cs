@@ -6,6 +6,8 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
+using System.Diagnostics;
+using NLog;
 
 namespace RentMyWrox
 {
@@ -17,5 +19,19 @@ namespace RentMyWrox
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        void Application_Error(object sender, EventArgs e)
+        {
+            if (HttpContext.Current.Server.GetLastError() != null)
+            {
+                Exception myException = HttpContext.Current.Server.GetLastError()
+                    .GetBaseException();
+                Trace.TraceError(myException.Message);
+                Trace.TraceError(myException.StackTrace);
+                ILogger logger = LogManager.GetCurrentClassLogger();
+                logger.Error(myException, myException.Message);
+            }
+        }
+
     }
 }

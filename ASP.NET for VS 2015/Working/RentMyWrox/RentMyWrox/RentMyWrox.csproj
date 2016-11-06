@@ -64,6 +64,10 @@
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.3.10\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -251,6 +255,8 @@
     <Content Include="Demonstrations\Page2.aspx" />
     <Content Include="Demonstrations\ServerControls.aspx" />
     <Content Include="Account\Web.config" />
+    <Content Include="Errors\Error404.aspx" />
+    <Content Include="Errors\Error500.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -318,7 +324,9 @@
     <Content Include="Bundle.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Project_Readme.html" />
     <Content Include="Site.Mobile.Master" />
     <Content Include="Views\web.config" />
@@ -339,6 +347,9 @@
     <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
     <Content Include="Views\Shared\_ShoppingCartSummary.cshtml" />
     <Content Include="Views\Shared\_RecentItems.cshtml" />
+    <Content Include="Views\ShoppingCart\Details.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Address.cshtml" />
+    <Content Include="Views\Order\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -527,6 +538,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\StoreOpenController.cs" />
     <Compile Include="Controllers\UserDemographicsController.cs" />
@@ -565,6 +577,20 @@
     </Compile>
     <Compile Include="Demonstrations\ServerControls.aspx.designer.cs">
       <DependentUpon>ServerControls.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Errors\Error404.aspx.cs">
+      <DependentUpon>Error404.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Errors\Error404.aspx.designer.cs">
+      <DependentUpon>Error404.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Errors\Error500.aspx.cs">
+      <DependentUpon>Error500.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Errors\Error500.aspx.designer.cs">
+      <DependentUpon>Error500.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -659,8 +685,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="ItemImages\" />
+    <Folder Include="Logs\" />
     <Folder Include="Views\Notifications\" />
-    <Folder Include="Views\ShoppingCart\" />
     <Folder Include="Views\StoreOpen\" />
   </ItemGroup>
   <ItemGroup>
