@@ -8,7 +8,7 @@
     <asp:GridView ID="GridView1" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
         runat="server" AutoGenerateColumns="False" DataKeyNames="Id" 
         DataSourceID="SqlDataSource2"
-        AllowPaging="True" AllowSorting="True" PageSize="5"
+        AllowPaging="True" AllowSorting="True" PageSize="<%$ AppSettings:AdminItemListPageSize %>"
         PagerSettings-Mode="NumericFirstLast" PagerSettings-Visible="true"
         PagerSettings-Position="TopAndBottom" PagerSettings-PageButtonCount="3"
         EmptyDataText="There are no data records to display.">

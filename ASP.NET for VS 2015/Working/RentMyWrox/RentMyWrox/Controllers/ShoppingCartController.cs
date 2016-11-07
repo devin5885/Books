@@ -48,7 +48,7 @@ namespace RentMyWrox.Controllers
                         // increment the quantity of the existing shopping cart item
                         sameItemInShoppingCart.Quantity++;
                     }
-                    UserHelper.AddUserVisit(id, context);
+                    //UserHelper.AddUserVisit(id, context);
                     context.SaveChanges();
                 }
                 ShoppingCartSummary summary = GetShoppingCartSummary(context);

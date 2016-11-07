@@ -1,4 +1,5 @@
 ﻿@using RentMyWrox.Models;
+
 @{
     bool userIsCheckingOut = ViewBag.AmCheckingOut == null ? false : ViewBag.AmCheckingOut;
 }
@@ -46,14 +47,18 @@
             </ul>
             <br />
             <div id="storeHoursMessage"></div>
-            @Html.Action("NonAdminSnippet", "Notifications")
+@if (ConfigManager.ViewNotifications)
+{
+
+                @Html.Action("NonAdminSnippet", "Notifications")
+}
         </div>
     </div>
     <div id="section">
         @RenderBody()
 @if (!userIsCheckingOut)
 {
-            <span>@Html.Action("Recent", "Item")</span>
+    <span>@Html.Action("Recent", "Item")</span>
 }
     </div>
     <div id="specialnotes">

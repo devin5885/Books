@@ -267,6 +267,8 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Admin\Web.config" />
+    <None Include="Properties\PublishProfiles\LocalToFile.pubxml" />
+    <None Include="Properties\PublishProfiles\RentMyWroxDemo - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -358,6 +360,9 @@
     </None>
     <Content Include="WebForms.Master" />
     <Content Include="Web.sitemap" />
+    <None Include="Web.RentMyWroxDemo - Web Deploy.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\AddPhoneNumber.aspx.cs">
@@ -627,6 +632,7 @@
       <DependentUpon>201611041924327_regular personalization.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ConfigManager.cs" />
     <Compile Include="Models\Hobby.cs" />
     <Compile Include="Models\HobbyReportItem.cs" />
     <Compile Include="Models\IdentityModels.cs" />

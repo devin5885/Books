@@ -40,7 +40,6 @@
             </Scripts>
         </asp:ScriptManager>
         <div id="header">
-            <img src="rentmywrox_logo.gif" />
 </div>
 <div id="nav">
     <div id="LeftNavigation" style="height:400px;">
