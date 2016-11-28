@@ -14,12 +14,14 @@ namespace Exercise1WF
 
     public partial class Form1 : Form
     {
-        private ArrayList submittedTests = new ArrayList();
-        private ArrayList outForChecking = new ArrayList();
+        private BindingList<Test> submittedTests = new BindingList<Test>();
+        private BindingList<Test> outForChecking = new BindingList<Test>();
 
         public Form1()
         {
             InitializeComponent();
+            dataGridViewSubmitted.DataSource = submittedTests;
+            dataGridViewOutTests.DataSource = outForChecking;
         }
 
         private void btnTurnInTest_Click(object sender, EventArgs e)
@@ -40,9 +42,6 @@ namespace Exercise1WF
 
             // Add.
             submittedTests.Add(test);
-
-            // Show result.
-            MessageBox.Show("Test was turned in.");
 
             // Clear fields.
             textBoxName.Clear();
@@ -80,9 +79,6 @@ namespace Exercise1WF
 
             // Add to out for checking.
             outForChecking.Add(testToFind);
-
-            // Report.
-            MessageBox.Show("Looking at test...");
         }
 
         private void btnReturnTest_Click(object sender, EventArgs e)
@@ -117,9 +113,6 @@ namespace Exercise1WF
             // Add.
             submittedTests.Add(testToFind);
 
-            // Return test.
-            MessageBox.Show("Test returned...");
-
             // Clear.
             textBoxName.Clear();
             textBoxTestNumber.Clear();
@@ -128,15 +121,11 @@ namespace Exercise1WF
         private void btnExit_Click(object sender, EventArgs e)
         {
             // Add all to submitted.
-            submittedTests.AddRange(outForChecking);
+            foreach (var test in outForChecking)
+                submittedTests.Add(test);
 
             // Remove from out for checking.
             outForChecking.Clear();
-
-            // Show.
-            lbxSubmitted.Items.Clear();
-            foreach (var test in submittedTests)
-                lbxSubmitted.Items.Add(test);
 
             // Clear list.
             submittedTests.Clear();

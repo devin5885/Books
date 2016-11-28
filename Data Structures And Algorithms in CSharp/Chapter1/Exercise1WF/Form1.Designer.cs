@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnTurnInTest = new System.Windows.Forms.Button();
             this.btnLookAtTest = new System.Windows.Forms.Button();
             this.btnReturnTest = new System.Windows.Forms.Button();
@@ -36,7 +37,14 @@
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.lbxSubmitted = new System.Windows.Forms.ListBox();
+            this.dataGridViewSubmitted = new System.Windows.Forms.DataGridView();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dataGridViewOutTests = new System.Windows.Forms.DataGridView();
+            this.label4 = new System.Windows.Forms.Label();
+            this.testBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSubmitted)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOutTests)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.testBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // btnTurnInTest
@@ -112,20 +120,61 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Test Number:";
             // 
-            // lbxSubmitted
+            // dataGridViewSubmitted
             // 
-            this.lbxSubmitted.FormattingEnabled = true;
-            this.lbxSubmitted.Location = new System.Drawing.Point(13, 106);
-            this.lbxSubmitted.Name = "lbxSubmitted";
-            this.lbxSubmitted.Size = new System.Drawing.Size(576, 186);
-            this.lbxSubmitted.TabIndex = 8;
+            this.dataGridViewSubmitted.AllowUserToAddRows = false;
+            this.dataGridViewSubmitted.AllowUserToDeleteRows = false;
+            this.dataGridViewSubmitted.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSubmitted.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dataGridViewSubmitted.Location = new System.Drawing.Point(12, 121);
+            this.dataGridViewSubmitted.Name = "dataGridViewSubmitted";
+            this.dataGridViewSubmitted.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dataGridViewSubmitted.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewSubmitted.Size = new System.Drawing.Size(240, 150);
+            this.dataGridViewSubmitted.TabIndex = 8;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 105);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(57, 13);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Submitted:";
+            // 
+            // dataGridViewOutTests
+            // 
+            this.dataGridViewOutTests.AllowUserToAddRows = false;
+            this.dataGridViewOutTests.AllowUserToDeleteRows = false;
+            this.dataGridViewOutTests.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dataGridViewOutTests.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dataGridViewOutTests.Location = new System.Drawing.Point(345, 121);
+            this.dataGridViewOutTests.Name = "dataGridViewOutTests";
+            this.dataGridViewOutTests.Size = new System.Drawing.Size(240, 150);
+            this.dataGridViewOutTests.TabIndex = 10;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(345, 104);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(56, 13);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Out Tests:";
+            // 
+            // testBindingSource
+            // 
+            this.testBindingSource.DataSource = typeof(Exercise1WF.Test);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(602, 313);
-            this.Controls.Add(this.lbxSubmitted);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.dataGridViewOutTests);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.dataGridViewSubmitted);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxName);
@@ -136,6 +185,9 @@
             this.Controls.Add(this.btnTurnInTest);
             this.Name = "Form1";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSubmitted)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewOutTests)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.testBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -151,7 +203,11 @@
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ListBox lbxSubmitted;
+        private System.Windows.Forms.DataGridView dataGridViewSubmitted;
+        private System.Windows.Forms.BindingSource testBindingSource;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DataGridView dataGridViewOutTests;
+        private System.Windows.Forms.Label label4;
     }
 }
 
