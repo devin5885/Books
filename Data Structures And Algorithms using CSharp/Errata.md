@@ -1,1 +1,1 @@
-This repository contains source code & errata for books I have studied.
+This file contains the Errata I have found in the book Data Structures & Algorithms using C# by Michael McMillian.
