@@ -3,6 +3,11 @@ This file contains the Errata I have found in the book Data Structures & Algorit
 ##Chapter 16 - Graphs and Graph Algorithms
 
 ---
+Pg. 288 - Graph class:
+
+The graph class allocates the array & matrix based on NUM_VERTICES, however the methods in the next section rely on there being NUM_VERTICES + 1 because they copy & rows columns from the next row down/column to the right. Therefore the ctor has been updated to allocate the array & matrix with NUM_VERTICES + 1 elements. The matrix initialization has also been updated appropropriately.
+
+---
 Pg. 288 - AddEdge Method:
 
 Second parameter is `eend` should be `end`.
@@ -92,3 +97,10 @@ int origVerts = numVertices;
 is not needed. origVerts is never used.
 
 ---
+Pg. 293 - Program block.
+
+Line:
+```
+theGraph.AddEdge(3, 4);
+```
+is invalid, there are only 4 vertexes, index 0 - 3, thus this statement should cause an error & has been removed.
