@@ -22,7 +22,10 @@ namespace Chapter16.ConsoleApp.Pg292
             theGraph.AddEdge(0, 1);
             theGraph.AddEdge(1, 2);
             theGraph.AddEdge(2, 3);
-            theGraph.AddEdge(3, 4);
+
+            // Errata - Removed - There are only 4 vertexes, index 0-3, so
+            // this edge is invalid.
+            //theGraph.AddEdge(3, 4);
 
             // Display.
             theGraph.ShowAdjacencyMatrix();

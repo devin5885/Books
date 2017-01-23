@@ -33,5 +33,16 @@ namespace Shared
             this.label = label;
             wasVisited = false;
         }
+
+        /// <summary>
+        /// Standard ToString override to display the label of the vertex.
+        /// </summary>
+        /// <returns>
+        /// The label.
+        /// </returns>
+        public override string ToString()
+        {
+            return label;
+        }
     }
 }

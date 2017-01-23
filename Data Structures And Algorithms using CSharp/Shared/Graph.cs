@@ -35,14 +35,16 @@ namespace Shared
         public Graph(bool directedGraph)
         {
             // Init params.
-            vertices = new Vertex[NUM_VERTICES];
-            adjMatrix = new int[NUM_VERTICES, NUM_VERTICES];
+            // Note: Pad structures by 1, this allows the various API's to use the additional
+            // element to zero the last element automatically.
+            vertices = new Vertex[NUM_VERTICES + 1];
+            adjMatrix = new int[NUM_VERTICES + 1, NUM_VERTICES + 1];
             numVerts = 0;
             directed = directedGraph;
 
             // Initialize matrix
-            for (int j = 0; j < NUM_VERTICES; j++)
-                for (int k = 0; k < NUM_VERTICES; k++)
+            for (int j = 0; j < NUM_VERTICES + 1; j++)
+                for (int k = 0; k < NUM_VERTICES + 1; k++)
                     adjMatrix[j, k] = 0;
         }
 
@@ -54,16 +56,16 @@ namespace Shared
         public Graph(Graph graphSrc)
         {
             // Init vertices array.
-            vertices = new Vertex[NUM_VERTICES];
+            vertices = new Vertex[NUM_VERTICES + 1];
             graphSrc.vertices.CopyTo(vertices, 0);
 
             numVerts = graphSrc.numVerts;
             directed = graphSrc.directed;
 
             // Initialize matrix.
-            adjMatrix = new int[NUM_VERTICES, NUM_VERTICES];
-            for (int j = 0; j < NUM_VERTICES; j++)
-                for (int k = 0; k < NUM_VERTICES; k++)
+            adjMatrix = new int[NUM_VERTICES + 1, NUM_VERTICES + 1];
+            for (int j = 0; j < NUM_VERTICES + 1; j++)
+                for (int k = 0; k < NUM_VERTICES + 1; k++)
                     adjMatrix[j, k] = graphSrc.adjMatrix[j, k];
         }
 
@@ -74,6 +76,10 @@ namespace Shared
         /// <returns>The index of the vertex.</returns>
         public int AddVertex(string label)
         {
+            // Make sure we don't overflow.
+            if (numVerts >= NUM_VERTICES)
+                throw new OverflowException();
+
             vertices[numVerts] = new Vertex(label);
             numVerts++;
             return numVerts - 1;
@@ -86,6 +92,10 @@ namespace Shared
         /// <param name="end">The index of the ending (i.e.) 'to' vertex.</param>
         public void AddEdge(int start, int end)
         {
+            // Make sure specified indexes are valid.
+            if (start >= numVerts || end >= numVerts)
+                throw new ArgumentException();
+
             adjMatrix[start, end] = 1;
 
             // Only automatically add reverse edge for non-directed graph.
@@ -124,6 +134,9 @@ namespace Shared
 
                 Console.WriteLine();
             }
+
+            // Spacer
+            Console.WriteLine();
         }
 
         /// <summary>
@@ -166,18 +179,23 @@ namespace Shared
         /// <param name="vert">The vert.</param>
         public void DelVertex(int vert)
         {
-            // Errata: Removed - This doesn't make sense.
+            // Errata: Removed - This is not needed.
             ////if (vert != numVerts - 1)
             ////{
 
-            for (int j = vert; j <= numVerts - 1; j++)
-                vertices[j] = vertices[j + 1];
+            // Check for invalid index.
+            if (vert >= numVerts)
+                throw new ArgumentException();
 
             for (int row = vert; row <= numVerts - 1; row++)
                 MoveRow(row, numVerts);
 
             for (int col = vert; col <= numVerts - 1; col++)
                 MoveCol(col, numVerts - 1);
+
+            // Remove vertex from vertices array.
+            for (int j = vert; j <= numVerts - 1; j++)
+                vertices[j] = vertices[j + 1];
 
             // Errata: Added.
             // Reduce the # of vertices.
@@ -191,7 +209,7 @@ namespace Shared
         /// Simple topological sort. Displays the sorted list of nodes.
         /// Note: Updated to not change the original graph.
         /// </summary>
-        public void TopSort()
+        public void TopSort(bool displaySteps = false)
         {
             // Init temp graph.
             Graph graphTemp = new Graph(this);
@@ -218,6 +236,9 @@ namespace Shared
                 // Store & delete the vertex.
                 gStack.Push(vertices[currVertex].label);
                 graphTemp.DelVertex(currVertex);
+
+                if (displaySteps)
+                    graphTemp.ShowAdjacencyMatrix();
             }
 
             // Display:
@@ -228,23 +249,31 @@ namespace Shared
         }
 
         /// <summary>
-        /// Moves the row.
+        /// Moves the contents of the next row into this row, thus overwriting the current values for this row.
         /// </summary>
         /// <param name="row">The row.</param>
         /// <param name="length">The length.</param>
         private void MoveRow(int row, int length)
         {
+            // Make sure parameters are valid.
+            if (row >= numVerts || length > numVerts)
+                throw new ArgumentException();
+
             for (int col = 0; col <= length - 1; col++)
                 adjMatrix[row, col] = adjMatrix[row + 1, col];
         }
 
         /// <summary>
-        /// Moves the col.
+        /// Moves the contents of the next column into this column, thus overwriting the current values for this column. 
         /// </summary>
         /// <param name="col">The col.</param>
         /// <param name="length">The length.</param>
         private void MoveCol(int col, int length)
         {
+            // Make sure parameters are valid.
+            if (col >= numVerts || length > numVerts)
+                throw new ArgumentException();
+
             for (int row = 0; row <= length - 1; row++)
                 adjMatrix[row, col] = adjMatrix[row, col + 1];
         }
